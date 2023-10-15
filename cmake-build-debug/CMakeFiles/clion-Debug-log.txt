@@ -1,0 +1,13 @@
+"C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S "G:\assignment cs213\CS213-2023-2024-Assignment1-V1.0" -B "G:\assignment cs213\CS213-2023-2024-Assignment1-V1.0\cmake-build-debug"
+-- Configuring done
+CMake Error at CMakeLists.txt:8 (add_executable):
+  Cannot find source file:
+
+    Last_sub.cpp
+
+
+CMake Error at CMakeLists.txt:8 (add_executable):
+  No SOURCES given to target: bmplib.cpp
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
