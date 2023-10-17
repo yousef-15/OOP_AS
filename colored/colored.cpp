@@ -1,11 +1,11 @@
 // FCAI – OOP Programming – 2023 - Assignment 1
-// Program Name:			    First_Six_Filters.cpp
-// Last Modification Date:	    14/10/2023
+// Program Name:			    Simple_Photoshop_Program.cpp
+// Last Modification Date:	    17/10/2023
 // Author1 and ID and Group:	Mohamed Taha    20221123 xxxxx
 // Author2 and ID and Group:	Sherief Mahmoud 20221080 xxxxx
 // Author3 and ID and Group:	Youssif waleed  20221206 xxxxx
 // Teaching Assistant:		    xxxxx xxxxx
-// Purpose:     A program of filters to apply on photos
+// Purpose:     A program of filters to apply on Colored photos.
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -14,9 +14,13 @@
 using namespace std;
 unsigned char image[SIZE][SIZE][RGB];
 unsigned char image1[SIZE][SIZE][RGB];
+unsigned char image2[SIZE][SIZE][RGB];       // New image to store the filter effect.
+unsigned char Blured_image[SIZE][SIZE][RGB]; // New image to store the filter effect.
+unsigned char cpy[SIZE][SIZE][RGB];          // A copy of the original image to store the filter effect.
+unsigned char Saved_image[SIZE][SIZE][RGB];
 void loadImage1();
 void loadImage();
-void saveImage();
+void Auto_saved_image();
 void doSomethingForImage();
 void Black_and_White_Filter()
 {
@@ -40,7 +44,14 @@ void Black_and_White_Filter()
             }
         }
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+                Saved_image[i][j][k] = image[i][j][k];
+        }
+    }
 }
 void Invert_Filter()
 {
@@ -55,7 +66,14 @@ void Invert_Filter()
             }
         }
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+                Saved_image[i][j][k] = image[i][j][k];
+        }
+    }
 }
 void Merge_Filter()
 {
@@ -71,7 +89,14 @@ void Merge_Filter()
             }
         }
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+                Saved_image[i][j][k] = image[i][j][k];
+        }
+    }
 }
 void Flip_Filter()
 {
@@ -109,7 +134,14 @@ void Flip_Filter()
     {
         cout << "Press (h) to flip the image horizontally OR (v) to flip it Vertically: ";
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+                Saved_image[i][j][k] = image[i][j][k];
+        }
+    }
 }
 void Darken_Lighten_Filter()
 {
@@ -147,7 +179,14 @@ void Darken_Lighten_Filter()
     {
         cout << "Press (d) to darken the image OR (l) to lighten the image: ";
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+                Saved_image[i][j][k] = image[i][j][k];
+        }
+    }
 }
 void Rotate_Filter()
 {
@@ -155,20 +194,19 @@ void Rotate_Filter()
     int degree;
     cout << "Enter the degree you want to rotate (90 , 180 , 270): ";
     cin >> degree;
-    unsigned char image2[SIZE][SIZE][RGB]; // New image to store the filter effect.
-    for (int i = 0; i < SIZE; ++i)
-    {
-        for (int j = 0; j < SIZE; ++j)
-        {
-            for (int k = 0; k < RGB; ++k)
-            {
-                image2[i][j][k] = image[i][j][k];
-            }
-        }
-    }
     if (degree == 90)
     {
 
+        for (int i = 0; i < SIZE; ++i)
+        {
+            for (int j = 0; j < SIZE; ++j)
+            {
+                for (int k = 0; k < RGB; ++k)
+                {
+                    image2[i][j][k] = image[i][j][k];
+                }
+            }
+        }
         for (int i = SIZE; i >= 0; --i)
         {
             for (int j = SIZE - 1; j >= 0; --j)
@@ -186,6 +224,16 @@ void Rotate_Filter()
         while (n--)
         {
 
+            for (int i = 0; i < SIZE; ++i)
+            {
+                for (int j = 0; j < SIZE; ++j)
+                {
+                    for (int k = 0; k < RGB; ++k)
+                    {
+                        image2[i][j][k] = image[i][j][k];
+                    }
+                }
+            }
             for (int i = SIZE; i >= 0; --i)
             {
                 for (int j = SIZE - 1; j >= 0; --j)
@@ -203,6 +251,17 @@ void Rotate_Filter()
         int n = 3;
         while (n--)
         {
+
+            for (int i = 0; i < SIZE; ++i)
+            {
+                for (int j = 0; j < SIZE; ++j)
+                {
+                    for (int k = 0; k < RGB; ++k)
+                    {
+                        image2[i][j][k] = image[i][j][k];
+                    }
+                }
+            }
             for (int i = SIZE; i >= 0; --i)
             {
                 for (int j = SIZE - 1; j >= 0; --j)
@@ -219,7 +278,16 @@ void Rotate_Filter()
     {
         cout << "Enter the degree you want to rotate (90 , 180 , 270): ";
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
 }
 void Edges_Filter()
 {
@@ -243,7 +311,6 @@ void Edges_Filter()
             }
         }
     }
-    unsigned char image2[SIZE][SIZE][RGB]; // New image set to white.
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -268,18 +335,30 @@ void Edges_Filter()
             }
         }
     }
-    char imageFileName[100];
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeRGBBMP(imageFileName, image2);
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                image[i][j][k] = image2[i][j][k];
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
 }
 void Enlarge_image()
 {
     // Enlarge a quarter of an image that user inserts.
-    unsigned char image2[SIZE][SIZE][RGB]; // New image to store the filter effect.
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -371,56 +450,20 @@ void Enlarge_image()
             Rows += 2;
         }
     }
-    saveImage();
-}
-void Blur_Filter()
-{
-    // Blur an image.
-    unsigned char Blured_image[SIZE][SIZE][RGB]; // New image to store the filter effect.
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < SIZE; ++i)
     {
-        for (int j = 0; j < SIZE; j++)
+        for (int j = 0; j < SIZE; ++j)
         {
-            for (int k = 0; k < RGB; k++)
+            for (int k = 0; k < RGB; ++k)
             {
-                Blured_image[i][j][k] = image[i][j][k];
+                Saved_image[i][j][k] = image[i][j][k];
             }
         }
     }
-    for (int i = 0; i < SIZE; i++)
-    {
-        for (int j = 0; j < SIZE; j++)
-        {
-            for (int z = 0; z < RGB; z++)
-            {
-                int sum = 0; // store The summation of pixels to calculate the average.
-                int counter = 0;
-                for (int k = -3; k < 4; k++)
-                {
-                    for (int h = -3; h < 4; h++)
-                    {
-                        if (i + k < 0 or i + k > SIZE - 1 or j + h < 0 or j + h > SIZE - 1) // Avoid dealing with the outter pixels of the image.
-                            continue;
-                        sum += image[i + k][j + h][z];
-                        counter++;
-                    }
-                }
-                Blured_image[i][j][z] = sum / counter;
-            }
-        }
-    }
-    char imageFileName[100];
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeRGBBMP(imageFileName, Blured_image);
 }
 void Shrink_Filter()
 {
     // Shrink an image to a size that user inserts.
-    unsigned char image2[SIZE][SIZE][RGB]; // New image to store the filter effect.
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -500,18 +543,99 @@ void Shrink_Filter()
             Rows += 3;
         }
     }
-    char imageFileName[100];
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeRGBBMP(imageFileName, image2);
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                image[i][j][k] = image2[i][j][k];
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
+}
+void Mirror_Filter()
+{
+    // Mirrors an image according to user choice.
+    cout << "Enter how u want to mirror the image ((l)eft, (r)ight, (u)pper, (d)own side): ";
+    char Mirror;
+    cin >> Mirror;
+    if (Mirror == 'l')
+    {
+        for (int i = 0; i < SIZE; ++i)
+        {
+            for (int j = 127; j >= 0; --j)
+            {
+                for (int k = 0; k < RGB; ++k)
+                {
+                    image[i][255 - j][k] = image[i][j][k];
+                }
+            }
+        }
+    }
+    else if (Mirror == 'r')
+    {
+        for (int i = 0; i < SIZE; ++i)
+        {
+            for (int j = 255; j >= 128; --j)
+            {
+                for (int k = 0; k < RGB; k++)
+                {
+                    image[i][255 - j][k] = image[i][j][k];
+                }
+            }
+        }
+    }
+    else if (Mirror == 'u')
+    {
+        for (int i = 0; i < 128; ++i)
+        {
+            for (int j = 0; j < SIZE; ++j)
+            {
+                for (int k = 0; k < RGB; k++)
+                {
+                    image[255 - i][j][k] = image[i][j][k];
+                }
+            }
+        }
+    }
+    else if (Mirror == 'd')
+    {
+        for (int i = 128; i < SIZE; ++i)
+        {
+            for (int j = 0; j < SIZE; ++j)
+            {
+                for (int k = 0; k < RGB; k++)
+                {
+                    image[255 - i][j][k] = image[i][j][k];
+                }
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; k++)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
 }
 void Shuffle_Filter()
 {
     // Shuffle the quarters of an image depending on the order user inserts.
-    unsigned char image2[SIZE][SIZE][RGB]; // New image to store the filter effect.
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -713,12 +837,76 @@ void Shuffle_Filter()
             }
         }
     }
-    saveImage();
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
+}
+void Blur_Filter()
+{
+    // Blur an image.
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            for (int k = 0; k < RGB; k++)
+            {
+                Blured_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            for (int z = 0; z < RGB; z++)
+            {
+                int sum = 0; // store The summation of pixels to calculate the average.
+                int counter = 0;
+                for (int k = -3; k < 4; k++)
+                {
+                    for (int h = -3; h < 4; h++)
+                    {
+                        if (i + k < 0 or i + k > SIZE - 1 or j + h < 0 or j + h > SIZE - 1) // Avoid dealing with the outter pixels of the image.
+                            continue;
+                        sum += image[i + k][j + h][z];
+                        counter++;
+                    }
+                }
+                Blured_image[i][j][z] = sum / counter;
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                image[i][j][k] = Blured_image[i][j][k];
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
 }
 void Crop_Filter()
 {
     // Crop an image to a size that user inserts.
-    unsigned char image2[SIZE][SIZE][RGB]; // New image to store the filter effect.
     int X, Y, Width, Length;
     cout << "Enter the X coordinate: ";
     cin >> X;
@@ -748,73 +936,26 @@ void Crop_Filter()
             }
         }
     }
-    char imageFileName[100];
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeRGBBMP(imageFileName, image2);
-}
-void Mirror_Filter()
-{
-    // Mirrors an image according to user choice.
-    cout << "Enter how u want to mirror the image ((l)eft, (r)ight, (u)pper, (d)own side): ";
-    char Mirror;
-    cin >> Mirror;
-    if (Mirror == 'l')
+    for (int i = 0; i < SIZE; ++i)
     {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                image[i][j][k] = image2[i][j][k];
+            }
+        }
         for (int i = 0; i < SIZE; ++i)
         {
-            for (int j = 127; j >= 0; --j)
+            for (int j = 0; j < SIZE; ++j)
             {
                 for (int k = 0; k < RGB; ++k)
                 {
-                    image[i][255 - j][k] = image[i][j][k];
+                    Saved_image[i][j][k] = image[i][j][k];
                 }
             }
         }
     }
-    else if (Mirror == 'r')
-    {
-        for (int i = 0; i < SIZE; ++i)
-        {
-            for (int j = 255; j >= 128; --j)
-            {
-                for (int k = 0; k < RGB; k++)
-                {
-                    image[i][255 - j][k] = image[i][j][k];
-                }
-            }
-        }
-    }
-    else if (Mirror == 'u')
-    {
-        for (int i = 0; i < 128; ++i)
-        {
-            for (int j = 0; j < SIZE; ++j)
-            {
-                for (int k = 0; k < RGB; k++)
-                {
-                    image[255 - i][j][k] = image[i][j][k];
-                }
-            }
-        }
-    }
-    else if (Mirror == 'd')
-    {
-        for (int i = 128; i < SIZE; ++i)
-        {
-            for (int j = 0; j < SIZE; ++j)
-            {
-                for (int k = 0; k < RGB; k++)
-                {
-                    image[255 - i][j][k] = image[i][j][k];
-                }
-            }
-        }
-    }
-    saveImage();
 }
 void Skew_Filter_right()
 {
@@ -822,14 +963,13 @@ void Skew_Filter_right()
     cout << "Enter the degree: ";
     float deg;
     cin >> deg;
-    unsigned char copy[SIZE][SIZE][RGB]; // A copy of the original image to store the filter effect.
     for (int i = 0; i < SIZE; i++)
     {
         for (int j = 0; j < SIZE; j++)
         {
             for (int z = 0; z < RGB; z++)
             {
-                copy[i][j][z] = 255;
+                cpy[i][j][z] = 255;
             }
         }
     }
@@ -857,7 +997,7 @@ void Skew_Filter_right()
                 {
                     break;
                 }
-                copy[i][j++][h] = avg;
+                cpy[i][j++][h] = avg;
                 if ((int)(pixels + remainder) < (int)pixels)
                 {
                     remainder += pixels - (int)pixels;
@@ -869,13 +1009,26 @@ void Skew_Filter_right()
             }
         }
     }
-    char imageFileName[100];
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeRGBBMP(imageFileName, copy);
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                image[i][j][k] = cpy[i][j][k];
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
 }
 void Skew_Filter_up()
 {
@@ -883,14 +1036,13 @@ void Skew_Filter_up()
     cout << "Enter the degree: ";
     float deg;
     cin >> deg;
-    unsigned char copy[SIZE][SIZE][RGB]; // A copy of the original image to store the filter effect.
     for (int i = 0; i < SIZE; i++)
     {
         for (int j = 0; j < SIZE; j++)
         {
             for (int z = 0; z < RGB; z++)
             {
-                copy[i][j][z] = 255;
+                cpy[i][j][z] = 255;
             }
         }
     }
@@ -901,7 +1053,6 @@ void Skew_Filter_up()
             swap(image[i][j], image[i][SIZE - j - 1]);
         }
     }
-    unsigned char image2[SIZE][SIZE][RGB]; // New image to store the ( 90 degree rotate) filter effect.
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -946,7 +1097,7 @@ void Skew_Filter_up()
                 {
                     break;
                 }
-                copy[j++][i][h] = avg;
+                cpy[j++][i][h] = avg;
                 if ((int)(pixels + remainder) < (int)pixels)
                 {
                     remainder += pixels - (int)pixels;
@@ -958,13 +1109,26 @@ void Skew_Filter_up()
             }
         }
     }
-    char imageFileName[100];
-    // Get gray scale image target file name
-    cout << "Enter the target image file name: ";
-    cin >> imageFileName;
-    // Add to it .bmp extension and load image
-    strcat(imageFileName, ".bmp");
-    writeRGBBMP(imageFileName, copy);
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                image[i][j][k] = cpy[i][j][k];
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; ++i)
+    {
+        for (int j = 0; j < SIZE; ++j)
+        {
+            for (int k = 0; k < RGB; ++k)
+            {
+                Saved_image[i][j][k] = image[i][j][k];
+            }
+        }
+    }
 }
 int main()
 {
@@ -985,6 +1149,7 @@ int main()
          << "d- Crop Image.\n"
          << "e- Skew Image Right. \n"
          << "f- Skew Image Up.\n"
+         << "g- Save image.\n"
          << "0- Exit\n";
     char num_filter;
     loadImage();
@@ -992,6 +1157,7 @@ int main()
     {
         cout << "Select a filter number from the list to apply or 0 to exit: ";
         cin >> num_filter;
+        string s = "";
         if (num_filter == '1')
         {
             Black_and_White_Filter();
@@ -1052,6 +1218,10 @@ int main()
         {
             Skew_Filter_up();
         }
+        else if (num_filter == 'g')
+        {
+            Auto_saved_image();
+        }
         else
         {
             break;
@@ -1090,4 +1260,14 @@ void saveImage()
     // Add to it .bmp extension and load image
     strcat(imageFileName, ".bmp");
     writeRGBBMP(imageFileName, image);
+}
+void Auto_saved_image()
+{
+    char imageFileName[100];
+    // Get gray scale image target file name
+    cout << "Enter the target image file name: ";
+    cin >> imageFileName;
+    // Add to it .bmp extension and load image
+    strcat(imageFileName, ".bmp");
+    writeRGBBMP(imageFileName, Saved_image);
 }
