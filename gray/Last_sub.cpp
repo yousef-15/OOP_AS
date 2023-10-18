@@ -101,18 +101,20 @@ void Flip_Filter()
             }
         }
     }
-    else if (Flip == 'h') // Horizontsl flip.
+    else if (Flip == 'h') // Horizontal flip.
     {
         for (int i = 0; i < SIZE; i++)
         {
             for (int j = 0; j < SIZE / 2; j++)
             {
-                swap(image[i][j], image[i][SIZE - j - 1]);
+                swap(image[i][j], image[i][SIZE - j - 1]);//swap the most left pixel with the most right
+                //and the second most left with the second most right and so on.
             }
         }
     }
     else
     {
+        // in case the input was not h nor v .
         cout << "Press (h) to flip the image horizontally OR (v) to flip it Vertically: ";
     }
     for (int i = 0; i < SIZE; ++i)
@@ -146,12 +148,13 @@ void Darken_Lighten_Filter()
             for (int j = 0; j < SIZE; ++j)
             {
 
-                image[i][j] = 128 + (image[i][j] / 2);
+                image[i][j] = 128 + (image[i][j] / 2);// lighten the image 50%
             }
         }
     }
     else
     {
+        // in case the input was not d nor l .
         cout << "Press (d) to darken the image OR (l) to lighten the image: ";
     }
     for (int i = 0; i < SIZE; ++i)
@@ -182,7 +185,7 @@ void Rotate_Filter()
         {
             for (int j = SIZE - 1; j >= 0; --j)
             {
-                image[SIZE - i - 1][j] = image2[j][i];
+                image[SIZE - i - 1][j] = image2[j][i];// rotating each pixel 90 degrees
             }
         }
     }
@@ -203,7 +206,7 @@ void Rotate_Filter()
             {
                 for (int j = SIZE - 1; j >= 0; --j)
                 {
-                    image[SIZE - i - 1][j] = image2[j][i];
+                    image[SIZE - i - 1][j] = image2[j][i];// rotating each pixel 90 degrees but this time twice to get 180 rotation
                 }
             }
         }
@@ -225,13 +228,14 @@ void Rotate_Filter()
             {
                 for (int j = SIZE - 1; j >= 0; --j)
                 {
-                    image[SIZE - i - 1][j] = image2[j][i];
+                    image[SIZE - i - 1][j] = image2[j][i]; // rotating 90 degrees 3 times
                 }
             }
         }
     }
     else
     {
+        // in case the given degree wasn't in the options
         cout << "Enter the degree you want to rotate (90 , 180 , 270): ";
     }
     for (int i = 0; i < SIZE; ++i)
@@ -310,11 +314,14 @@ void Enlarge_image()
     int Rows = 0, Columns = 0;
     if (quarter == 1)
     {
+
         for (int i = 0; i < 128; ++i)
         {
             Columns = 0;
             for (int j = 0; j < 128; ++j)
             {
+                // take the average of a 2*2 matrix
+                // then set the average to the whole matrix(in the first quarter)
                 image[Rows][Columns] = image2[i][j];
                 image[Rows][Columns + 1] = image2[i][j];
                 image[Rows + 1][Columns] = image2[i][j];
@@ -332,6 +339,8 @@ void Enlarge_image()
             Columns = 0;
             for (int j = 128; j < 256; ++j)
             {
+                // take the average of a 2*2 matrix
+                // then set the average to the whole matrix(in the second quarter)
                 image[Rows][Columns] = image2[i][j];
                 image[Rows][Columns + 1] = image2[i][j];
                 image[Rows + 1][Columns] = image2[i][j];
@@ -348,6 +357,8 @@ void Enlarge_image()
             Columns = 0;
             for (int j = 0; j < 128; ++j)
             {
+                // take the average of a 2*2 matrix
+                // then set the average to the whole matrix(in the third quarter)
                 image[Rows][Columns] = image2[i][j];
                 image[Rows][Columns + 1] = image2[i][j];
                 image[Rows + 1][Columns] = image2[i][j];
@@ -364,6 +375,8 @@ void Enlarge_image()
             Columns = 0;
             for (int j = 128; j < 256; ++j)
             {
+                // take the average of a 2*2 matrix
+                // then set the average to the whole matrix(in the fourth quarter)
                 image[Rows][Columns] = image2[i][j];
                 image[Rows][Columns + 1] = image2[i][j];
                 image[Rows + 1][Columns] = image2[i][j];
@@ -384,7 +397,7 @@ void Enlarge_image()
 void Shrink_Filter()
 {
     // Shrink an image to a size that user inserts.
-
+    // New image to store the filter effect.
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -396,6 +409,7 @@ void Shrink_Filter()
     string shrink;
     cin >> shrink;
     int Rows = 0, Columns = 0;
+    // calculate the average of a matrix then set this average to a certain places depending on the user's input.
     if (shrink == "1/2")
     {
         for (int i = 0; i < 128; ++i)
@@ -403,6 +417,7 @@ void Shrink_Filter()
             Columns = 0;
             for (int j = 0; j < 128; ++j)
             {
+                // take the average of a 2*2 matrix
                 int Average = (image[Rows][Columns] + image[Rows + 1][Columns] + image[Rows][Columns + 1] + image[Rows + 1][Columns + 1]) / 4;
                 image2[i][j] = Average;
                 Columns += 2;
@@ -417,6 +432,7 @@ void Shrink_Filter()
             Columns = 0;
             for (int j = 0; j < 64; j++)
             {
+                //calculate the average of a 4*4 matrix
                 int Average = 0;
                 for (int k = Rows; k < Rows + 4; ++k)
                 {
@@ -438,6 +454,7 @@ void Shrink_Filter()
             Columns = 0;
             for (int j = 0; j < 85; j++)
             {
+                //calculate the average of 3*3 matrix
                 int Average = 0;
                 for (int k = Rows; k < Rows + 3; ++k)
                 {
@@ -479,7 +496,7 @@ void Mirror_Filter()
         {
             for (int j = 127; j >= 0; --j)
             {
-                image[i][255 - j] = image[i][j];
+                image[i][255 - j] = image[i][j];// making the left side of the image equal to the right side
             }
         }
     }
@@ -489,7 +506,7 @@ void Mirror_Filter()
         {
             for (int j = 255; j >= 128; --j)
             {
-                image[i][255 - j] = image[i][j];
+                image[i][255 - j] = image[i][j];// making the right side of the image equal to the left side
             }
         }
     }
@@ -499,7 +516,7 @@ void Mirror_Filter()
         {
             for (int j = 0; j < SIZE; ++j)
             {
-                image[255 - i][j] = image[i][j];
+                image[255 - i][j] = image[i][j];// making the upper side of the image equal to the lower side
             }
         }
     }
@@ -509,7 +526,7 @@ void Mirror_Filter()
         {
             for (int j = 0; j < SIZE; ++j)
             {
-                image[255 - i][j] = image[i][j];
+                image[255 - i][j] = image[i][j];// making the lower side of the image equal to the upper side
             }
         }
     }
@@ -524,7 +541,7 @@ void Mirror_Filter()
 void Shuffle_Filter()
 {
     // Shuffle the quarters of an image depending on the order user inserts.
-
+    // image2 us a copy of image
     for (int i = 0; i < SIZE; ++i)
     {
         for (int j = 0; j < SIZE; ++j)
@@ -535,6 +552,7 @@ void Shuffle_Filter()
     int n = 4;
     cout << "Enter the order of quarters you want seperated by white spaces: ";
     int Order;
+    // making a condition for each possibility input
     for (int i = 1; i <= n; ++i) // i is the quarter we work on.
     {
         cin >> Order;
@@ -716,7 +734,7 @@ void Blur_Filter()
             {
                 for (int h = -3; h < 4; h++)
                 {
-                    if (i + k < 0 or i + k > SIZE - 1 or j + h < 0 or j + h > SIZE - 1) // Avoid dealing with the outter pixels of the image.
+                    if (i + k < 0 or i + k > SIZE - 1 or j + h < 0 or j + h > SIZE - 1) // Avoid dealing with the outer pixels of the image.
                         continue;
                     sum += image[i + k][j + h];
                     counter++;
@@ -753,6 +771,7 @@ void Crop_Filter()
     cin >> Length;
     cout << "Enter the Width: ";
     cin >> Width;
+    // make a new image (image2) white
     for (int i = 0; i < SIZE; i++)
     {
         for (int j = 0; j < SIZE; j++)
@@ -760,6 +779,7 @@ void Crop_Filter()
             image2[i][j] = 255;
         }
     }
+    // putting the cropped part in image2
     for (int i = X; i < (X) + Length; i++)
     {
         for (int j = Y; j < (Y) + Width; j++)
